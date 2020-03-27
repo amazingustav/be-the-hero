@@ -1,15 +1,13 @@
-const express = require('express');
-const routes = express.Router();
+const express = require('express')
+const OngController = require('./controller/OngController')
+const IncidentController = require('./controller/IncidentController')
 
-routes.post('/users', (request, response) => {
-    const body = request.body;
+const routes = express.Router()
 
-    console.log(body);
+routes.post('/ongs', OngController.create)
+routes.get('/ongs', OngController.index);
 
-    return response.json({
-        event: 'Hello World',
-        user: 'Gustavo Amorim'
-    })
-});
+routes.post('/incidents', IncidentController.create)
+routes.get('/incidents', IncidentController.index);
 
-module.exports = routes;
+module.exports = routes; 
