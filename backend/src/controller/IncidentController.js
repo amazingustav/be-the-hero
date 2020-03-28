@@ -1,6 +1,12 @@
 const connection = require('../database/connection')
 
 module.exports = {
+    async index(request, response) {
+        const ongs = await connection('incidents').select('*')
+    
+        return response.json(ongs)
+    },
+    
     async create(request, response) {
         const { title, description, value } = request.body
         const ong_id = request.headers.authorization
@@ -15,9 +21,21 @@ module.exports = {
         return response.json({ id })
     },
 
-    async index(request, response) {
-        const ongs = await connection('incidents').select('*')
-    
-        return response.json(ongs)
+    async delete(request, response) {
+        const { id } = request.params
+        const ong_id = request.headers.authorization
+
+        const incident = await connection('incidents')
+            .where('id', id)
+            .select('ong_id')
+            .first()
+
+        if (incident.ong_id != ong_id) {
+            return response.status(401).json({ error: "Operation not allowed" })
+        }
+
+        await connection('incidents').where('id', id).delete()
+
+        return response.status(204).send()
     }
 }
