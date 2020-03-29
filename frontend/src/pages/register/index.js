@@ -25,7 +25,8 @@ export default function Register() {
     try {
       const response = await api.post('ongs', data)
       alert(`Seu ID de acesso: ${response.data.id}`)
-    } catch {
+    } catch(error) {
+      console.log(error)
       alert('Erro no cadastro. Tente novamente.')
     }
   }
