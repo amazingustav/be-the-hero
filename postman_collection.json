@@ -1,0 +1,201 @@
+{
+	"info": {
+		"_postman_id": "8836d0d5-4e7f-42b2-b358-204177311cb7",
+		"name": "be-the-hero",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/ongs",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Test ONG\",\n\t\"email\": \"test@ong.org\",\n\t\"whatsapp\": \"11988776655\",\n\t\"city\": \"City\",\n\t\"uf\": \"SP\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3333/ongs",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"ongs"
+					]
+				},
+				"description": "Create an ONG"
+			},
+			"response": []
+		},
+		{
+			"name": "/ongs",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3333/ongs",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"ongs"
+					]
+				},
+				"description": "Get all ONGs"
+			},
+			"response": []
+		},
+		{
+			"name": "/incidents",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{ONG_ID_HERE}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"title\": \"Accident with 2 puppy dogs and a car\",\n\t\"description\": \"The puppies were lost, crossing the street when a car chocked them\",\n\t\"value\": 300.00\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3333/incidents",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"incidents"
+					]
+				},
+				"description": "Create an incident"
+			},
+			"response": []
+		},
+		{
+			"name": "/incidents",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{ong_id}"
+					}
+				],
+				"url": {
+					"raw": "localhost:3333/incidents",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"incidents"
+					]
+				},
+				"description": "Get all incidents given an ONG ID"
+			},
+			"response": []
+		},
+		{
+			"name": "/incidents/:id",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "{ong_id}"
+					}
+				],
+				"url": {
+					"raw": "localhost:3333/incidents/:id",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"incidents",
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "{incident_id}"
+						}
+					]
+				},
+				"description": "Delete an incident given its ID and an ONG ID as Authorization"
+			},
+			"response": []
+		},
+		{
+			"name": "/profile",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "{ong_id}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "localhost:3333/profile",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"profile"
+					]
+				},
+				"description": "List all incidents given an ONG ID as Authorization"
+			},
+			"response": []
+		},
+		{
+			"name": "/sessions",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id\": \"{ong_id}\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3333/sessions",
+					"host": [
+						"localhost"
+					],
+					"port": "3333",
+					"path": [
+						"sessions"
+					]
+				},
+				"description": "Make login at Be The Hero website"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
