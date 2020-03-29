@@ -3,6 +3,7 @@ const connection = require('../database/connection')
 module.exports = {
     async index(request, response) {
         const { page = 1 } = request.query
+        const ongId = request.headers.authorization
 
         const [count] = await connection('incidents').count()
 
@@ -18,6 +19,7 @@ module.exports = {
                 'ongs.city',
                 'ongs.uf'
             ])
+            .where('ongs.id', ongId)
     
         response.header('X-Total-Count', count['count(*)'])
 
